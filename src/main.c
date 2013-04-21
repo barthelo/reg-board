@@ -6,9 +6,6 @@ int main(void)
 {
   //setupEngine();
   setupSteering();
-  //setSteeringAngle(5);
-  while(1)
-  {
-    
-  }
+  STR_vsetAngle(-100);
+  while(1);
 }

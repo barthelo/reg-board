@@ -14,9 +14,10 @@
 
 #define MAX_ANGLE 30
 #define MIN_ANGLE -30
+#define PWM_PERIOD 0.02 //Periode in Millisekunden (ms)
 
 /*
-#define PWM_PERIOD 20 //Periode in Millisekunden (ms)
+
 #define MAX_PWM_PERCENT 11.115
 #define MIN_PWM_PERCENT 5.5575
 #define MEAN_PWM_Percent 8.33625
@@ -24,4 +25,4 @@
 
 void setupSteering();
 void setPWM_Steering();
-void setSteeringAngle(float);
+void STR_vsetAngle(int8_t);

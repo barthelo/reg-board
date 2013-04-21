@@ -10,7 +10,7 @@
 
 
 
-uint16_t duty_cycle=8.33625;
+uint16_t STR_u16DCycle=8.33625;
 
 
 /**
@@ -49,7 +49,7 @@ void setupSteering()
     //2 Kanal konfigurieren
     myTIM_OC.TIM_OCMode=TIM_OCMode_PWM1;
     myTIM_OC.TIM_OutputState=TIM_OutputState_Enable;
-    myTIM_OC.TIM_Pulse=duty_cycle*2;
+    myTIM_OC.TIM_Pulse=(uint16_t)STR_u16DCycle*2;
     myTIM_OC.TIM_OCPolarity=TIM_OCPolarity_High;
     TIM_OC2Init ( TIM3,&myTIM_OC );
     TIM_OC2PreloadConfig ( TIM3, TIM_OCPreload_Enable );
@@ -68,20 +68,21 @@ void setupSteering()
  * @param  angle Winkel in dem die Reifen einschlagen. Bereich: -30°<=angle<=+30°
  * @retval none
  **/
-void setSteeringAngle ( float angle )
+void STR_vsetAngle(int8_t STR_i8Angle)
 {
     //Pruefen, ob der Winkle den Bereich ueberschreitet. 
     //Bei Bedarf auf maximalwerte setzen.
-    if (angle>MAX_ANGLE)
+    if(STR_i8Angle>MAX_ANGLE)
     {
-        angle=MAX_ANGLE;
+        STR_i8Angle=MAX_ANGLE;
     }
-    if(angle<MIN_ANGLE)
+    if(STR_i8Angle<MIN_ANGLE)
     {
-        angle=MIN_ANGLE;
+        STR_i8Angle=MIN_ANGLE;
     }
     
-    duty_cycle=(angle+121)/79604;
-    TIM_SetCompare2(TIM3,duty_cycle);
-
+    //Berechnen der neuen DutyCycle aus der Einschaltzeit
+    STR_u16DCycle=(((STR_i8Angle+121)/79604.0)*100.0)/PWM_PERIOD;
+    //Setzen der neuen DutyCycle
+    TIM_SetCompare2(TIM3,(uint32_t)(STR_u16DCycle));
 }       

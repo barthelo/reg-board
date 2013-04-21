@@ -44,7 +44,7 @@ void setupEngine()
   //1 Kanal konfigurieren
   myTIM_OC.TIM_OCMode=TIM_OCMode_PWM1;
   myTIM_OC.TIM_OutputState=TIM_OutputState_Enable;
-  myTIM_OC.TIM_Pulse=30;
+  myTIM_OC.TIM_Pulse=11*2;
   myTIM_OC.TIM_OCPolarity=TIM_OCPolarity_High;
   TIM_OC1Init(TIM3,&myTIM_OC);
   TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
