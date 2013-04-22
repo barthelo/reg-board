@@ -82,7 +82,7 @@ void STR_vsetAngle(int8_t STR_i8Angle)
     }
     
     //Berechnen der neuen DutyCycle aus der Einschaltzeit
-    STR_u16DCycle=(((STR_i8Angle+121)/79604.0)*100.0)/PWM_PERIOD;
+    STR_u16DCycle=2*((((STR_i8Angle+10)+121)/79604.0)*100.0)/PWM_PERIOD;
     //Setzen der neuen DutyCycle
     TIM_SetCompare2(TIM3,(uint32_t)(STR_u16DCycle));
 }       
