@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_rcc.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    30-September-2011
+  * @version V1.0.2
+  * @date    05-March-2012
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the Reset and clock control (RCC) peripheral:
   *           - Internal/external clocks, PLL, CSS and MCO configuration
@@ -41,20 +41,25 @@
   ******************************************************************************
   * @attention
   *
-  * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
-  * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
-  * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
-  * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
-  * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
-  * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
   *
-  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+  * You may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at:
+  *
+  *        http://www.st.com/software_license_agreement_liberty_v2
+  *
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  *
   ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_rcc.h"
-#include "stm32f4xx.h"
 
 /** @addtogroup STM32F4xx_StdPeriph_Driver
   * @{
@@ -235,7 +240,6 @@ void RCC_DeInit(void)
   *            @arg RCC_HSE_Bypass: HSE oscillator bypassed with external clock
   * @retval None
   */
-#define assert_param(expr) ((void)0)
 void RCC_HSEConfig(uint8_t RCC_HSE)
 {
   /* Check the parameters */
@@ -660,7 +664,7 @@ void RCC_MCO2Config(uint32_t RCC_MCO2Source, uint32_t RCC_MCO2Div)
  |---------------|----------------|----------------|-----------------|-----------------| 
  |7WS(8CPU cycle)|      NA        |      NA        |120 < HCLK <= 138|112 < HCLK <= 120| 
  +-------------------------------------------------------------------------------------+    
-   @note When VOS bit (in PWR_CR register) is reset to '0\92, the maximum value of HCLK is 144 MHz.
+   @note When VOS bit (in PWR_CR register) is reset to '0’, the maximum value of HCLK is 144 MHz.
          You can use PWR_MainRegulatorModeConfig() function to set or reset this bit.
 
 @endverbatim
@@ -1807,4 +1811,4 @@ void RCC_ClearITPendingBit(uint8_t RCC_IT)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

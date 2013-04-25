@@ -5,13 +5,13 @@ AR=arm-none-eabi-ar
 
 vpath %.c src src/peripherals
 
-CFLAGS  = -g -O2 -Wall
+CFLAGS  = -g -O1 -Wall
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 CFLAGS += -ffreestanding -nostdlib
 CFLAGS += -Iinc -Iinc/core -Iinc/peripherals
 
-#SRCS  = stm32f4_discovery.c
+SRCS  = system_ARMCM4.c
 SRCS = misc.c stm32f4xx_dma.c stm32f4xx_rcc.c stm32f4xx_adc.c \
 	stm32f4xx_exti.c stm32f4xx_rng.c stm32f4xx_can.c stm32f4xx_flash.c \
 	stm32f4xx_rtc.c stm32f4xx_crc.c stm32f4xx_fsmc.c stm32f4xx_sdio.c \
@@ -21,7 +21,7 @@ SRCS = misc.c stm32f4xx_dma.c stm32f4xx_rcc.c stm32f4xx_adc.c \
 	stm32f4xx_cryp_tdes.c stm32f4xx_hash_sha1.c  stm32f4xx_usart.c \
 	stm32f4xx_dac.c stm32f4xx_i2c.c stm32f4xx_wwdg.c \
 	stm32f4xx_dbgmcu.c stm32f4xx_iwdg.c \
-	stm32f4xx_dcmi.c stm32f4xx_pwr.c
+	stm32f4xx_dcmi.c stm32f4xx_pwr.c \
 
 OBJS = $(SRCS:.c=.o)
 

@@ -19,12 +19,11 @@ uint16_t STR_u16DCycle=8.33625;
  * @param  none
  * @retval none
  **/
-void setupSteering()
+void STR_vSetupSteering()
 {
     TIM_TimeBaseInitTypeDef myTIM;
     GPIO_InitTypeDef myGPIO_TIM;
     TIM_OCInitTypeDef myTIM_OC;
-
 
     RCC_APB1PeriphClockCmd ( RCC_APB1Periph_TIM3,ENABLE );
     RCC_AHB1PeriphClockCmd ( RCC_AHB1Periph_GPIOA,ENABLE );
@@ -68,7 +67,7 @@ void setupSteering()
  * @param  angle Winkel in dem die Reifen einschlagen. Bereich: -30°<=angle<=+30°
  * @retval none
  **/
-void STR_vsetAngle(int8_t STR_i8Angle)
+void STR_vSetAngle(int8_t STR_i8Angle)
 {
     //Pruefen, ob der Winkle den Bereich ueberschreitet. 
     //Bei Bedarf auf maximalwerte setzen.

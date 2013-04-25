@@ -1,6 +1,9 @@
 # put your *.o targets here, make should handle the rest!
 
-SRCS = main.c system_stm32f4xx.c Engine.c Steering.c
+SRCS = 	main.c \
+	Engine.c \
+	Steering.c \
+	Pwm.c 
 
 # all the files will be generated with this name (main.elf, main.bin, main.hex, etc)
 
@@ -13,9 +16,10 @@ PROJ_NAME=main
 CC=arm-none-eabi-gcc
 OBJCOPY=arm-none-eabi-objcopy
 
-CFLAGS  = -g -O2 -Wall -Tstm32_flash.ld 
+CFLAGS  = -g -O1 -Wall -Tstm32_flash.ld 
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
+CFLAGS += -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVE
 
 ###################################################
 
@@ -48,7 +52,7 @@ $(PROJ_NAME).elf: $(SRCS)
 	$(OBJCOPY) -O binary $(PROJ_NAME).elf $(PROJ_NAME).bin
 
 clean:
-	rm -f *.o
+	rm -f ./lib/*.o
 	rm -f $(PROJ_NAME).elf
 	rm -f $(PROJ_NAME).hex
 	rm -f $(PROJ_NAME).bin
