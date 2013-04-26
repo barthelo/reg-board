@@ -9,11 +9,25 @@
  * 		Lenkung zu betreiben.
  ******************************************************************************/
 
+
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __STEERING_H
+#define __STEERING_H
+
+/* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "stm32f4xx_conf.h"
+#include "arm_math.h"
 
+/* Exported types ------------------------------------------------------------*/
 #define MAX_ANGLE 30
 #define MIN_ANGLE -30
 #define PWM_PERIOD 0.02 //Periode in Millisekunden (ms)
 
+/* Exported constants --------------------------------------------------------*/
+/* Exported macro ------------------------------------------------------------*/
+/* Exported functions --------------------------------------------------------*/
 void STR_vSetAngle ( int8_t );
+
+#endif /* __STEERING_H */

@@ -16,8 +16,6 @@
  **/
 void ENG_vSetDCycle(float32_t ENG_fDCycle)
 {
-    uint16_t ENG_u16ARR=0;
-    uint16_t ENG_u16CCR=0;
-    ENG_u16CCR=(uint16_t)((ENG_fDCycle/100.0)*ENG_u16ARR);
-    TIM_SetCompare1(TIM3,ENG_u16CCR);
+    PWM_u16CCR=(uint16_t)((ENG_fDCycle/100.0)*(PWM_u16ARR+1));
+    TIM_SetCompare1(TIM3,PWM_u16CCR);
 }

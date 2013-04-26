@@ -9,10 +9,7 @@ int main(void)
 {
   SystemInit();
   PWM_vInit();
-  //ENG_vSetupEngine();
-  //STR_vSetupSteering();
-  //STR_vSetAngle(10);
-  //ENG_vSetPwm(5.98);
+  ENG_vSetDCycle(8.8);
 
   while(1);
 }
