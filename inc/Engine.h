@@ -16,14 +16,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "stm32f4xx_conf.h"
-#include "arm_math.h"
 #include "Pwm.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
-void ENG_vSetDCycle(float32_t);
+void ENG_vSetDCycle(float);
 void setVilocity();
 void accelerate_without_Slippage();
 

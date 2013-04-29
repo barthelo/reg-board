@@ -18,7 +18,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "stm32f4xx_conf.h"
-#include "arm_math.h"
+#include "Pwm.h"
 
 /* Exported types ------------------------------------------------------------*/
 #define MAX_ANGLE 30
@@ -28,6 +28,6 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
-void STR_vSetAngle ( int8_t );
+void STR_vSetAngle (int8_t);
 
 #endif /* __STEERING_H */

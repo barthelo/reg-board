@@ -21,9 +21,7 @@
  **/
 void STR_vSetAngle(int8_t STR_i8Angle)
 {
-    float32_t STR_fDCycle=0;
-    uint16_t STR_u16CCR=0;
-    /*TODO*/uint16_t STR_u16ARR=0;
+    float STR_fDCycle;
     //Pruefen, ob der Winkle den Bereich ueberschreitet. 
     //Bei Bedarf auf maximalwerte setzen.
     if(STR_i8Angle>MAX_ANGLE)
@@ -36,8 +34,9 @@ void STR_vSetAngle(int8_t STR_i8Angle)
     }
     
     //Berechnen der neuen DutyCycle aus der Einschaltzeit
-    STR_fDCycle=2*((((STR_i8Angle+10)+121)/79604.0)*100.0)/PWM_PERIOD;
+    STR_fDCycle=((((STR_i8Angle)+121)/79604.0)*100.0)/PWM_PERIOD;
     //Setzen der neuen DutyCycle
-    /*TODO*/STR_u16CCR=(uint16_t)((STR_fDCycle/100.0)*(STR_u16ARR+1));
-    TIM_SetCompare2(TIM3,STR_u16CCR);
+    //DutyCycle =(TIM3_CCR1/ TIM3_ARR)* 100
+    PWM_u16CCR=(uint16_t)((STR_fDCycle/100.0f)*(PWM_u16ARR+1));
+    TIM_SetCompare2(TIM3,PWM_u16CCR);
 }       

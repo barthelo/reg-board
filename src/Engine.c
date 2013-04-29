@@ -14,8 +14,8 @@
  * @param  ENG_fDCycle Einschaltzeit in Prozent;
  * @retval none
  **/
-void ENG_vSetDCycle(float32_t ENG_fDCycle)
+void ENG_vSetDCycle(float ENG_fDCycle)
 {
-    PWM_u16CCR=(uint16_t)((ENG_fDCycle/100.0)*(PWM_u16ARR+1));
+    PWM_u16CCR=(uint16_t)((ENG_fDCycle/100.0f)*(PWM_u16ARR+1));
     TIM_SetCompare1(TIM3,PWM_u16CCR);
 }

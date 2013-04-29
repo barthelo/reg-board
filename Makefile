@@ -1,13 +1,15 @@
 # put your *.o targets here, make should handle the rest!
 
-SRCS = 	main.c \
-	Engine.c \
-	Steering.c \
-	Pwm.c 
+SRCS = main.c system_stm32f4xx.c stm32f4xx_it.c \
+Pwm.c Engine.c Steering.c
 
 # all the files will be generated with this name (main.elf, main.bin, main.hex, etc)
 
 PROJ_NAME=main
+
+# Put your stlink folder here so make burn will work.
+
+STLINK=/usr/bin
 
 # that's it, no need to change anything below this line!
 
@@ -16,10 +18,9 @@ PROJ_NAME=main
 CC=arm-none-eabi-gcc
 OBJCOPY=arm-none-eabi-objcopy
 
-CFLAGS  = -g -O1 -Wall -Tstm32_flash.ld 
+CFLAGS  = -g -Wall -Tstm32_flash.ld 
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
-CFLAGS += -DARM_MATH_CM4 -DUSE_STDPERIPH_DRIVE
 
 ###################################################
 
@@ -39,7 +40,17 @@ OBJS = $(SRCS:.c=.o)
 
 .PHONY: lib proj
 
-all: lib proj
+all: clean lib proj
+
+again: clean all
+
+# Flash the STM32F4
+burn:
+	$(STLINK)/st-flash write $(PROJ_NAME).bin 0x8000000
+
+# Create tags; assumes ctags exists
+ctags:
+	ctags -R --exclude=*cm0.h --exclude=*cm3.h .
 
 lib:
 	$(MAKE) -C lib
@@ -52,7 +63,7 @@ $(PROJ_NAME).elf: $(SRCS)
 	$(OBJCOPY) -O binary $(PROJ_NAME).elf $(PROJ_NAME).bin
 
 clean:
-	rm -f ./lib/*.o
+	rm -f *.o *.i
 	rm -f $(PROJ_NAME).elf
 	rm -f $(PROJ_NAME).hex
 	rm -f $(PROJ_NAME).bin

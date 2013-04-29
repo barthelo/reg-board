@@ -9,7 +9,8 @@ int main(void)
 {
   SystemInit();
   PWM_vInit();
-  ENG_vSetDCycle(8.8);
+  ENG_vSetDCycle(7.5);
+  STR_vSetAngle(0);
 
   while(1);
 }

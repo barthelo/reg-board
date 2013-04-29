@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file      startup_stm32f4xx.s
   * @author    MCD Application Team
-  * @version   V1.0.2
-  * @date      05-March-2012
+  * @version   V1.0.0
+  * @date      30-September-2011
   * @brief     STM32F4xx Devices vector table for Atollic TrueSTUDIO toolchain. 
   *            This module performs:
   *                - Set the initial SP
@@ -19,27 +19,44 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
+  */
+
+/*******************************************************************************
+  If you need C++, search for "__libc_init_array" and uncomment that line!
+  It is required for C++ support!
   */
     
   .syntax unified
-  .cpu cortex-m3
-  .fpu softvfp
-  .thumb
+  .cpu cortex-m4
+  .arch armv7e-m
+  .fpu fpv4-sp-d16
+  .eabi_attribute Tag_CPU_name, "Cortex-M4"
+  .eabi_attribute Tag_CPU_arch, 13              /* v7E-M */
+  .eabi_attribute Tag_CPU_arch_profile, 0x4D    /* Microcontroller */
+  .eabi_attribute Tag_THUMB_ISA_use, 2          /* Use Thumb */
+  .eabi_attribute Tag_FP_arch, 6                /* VFPv4-D16 */
+  .eabi_attribute Tag_ABI_HardFP_use, 3         /* SP and DP Arguments */
+  .eabi_attribute Tag_ABI_VFP_args, 1           /* VFP Arguments */
+  .eabi_attribute Tag_ABI_optimization_goals, 6 /* Optimize for debugging */
+  .eabi_attribute Tag_FP_HP_extension, 1        /* Allow VFPv3 */
+  .eabi_attribute Tag_CPU_unaligned_access, 1   /* Allow unaligned data access */
+  .eabi_attribute Tag_ABI_PCS_wchar_t, 4        /* wchat_t size 4 */
+  .eabi_attribute Tag_ABI_FP_denormal, 1        /* We need IEEE 754 denormal numbers */
+  .eabi_attribute Tag_ABI_FP_exceptions, 1      /* Check IEEE 754 inexact exception */
+  .eabi_attribute Tag_ABI_FP_number_model, 3    /* Use full IEEE 754 */
+  .eabi_attribute Tag_ABI_align_needed, 1       /* 8-byte alignment */
+  .eabi_attribute Tag_ABI_align_preserved, 1    /* Preserve 8-byte alignment */
+  .eabi_attribute Tag_ABI_enum_size, 1          /* Place enums in the smallest location they will fit. */
+  .thumb 
 
 .global  g_pfnVectors
 .global  Default_Handler
@@ -101,8 +118,10 @@ LoopFillZerobss:
 
 /* Call the clock system intitialization function.*/
   bl  SystemInit   
-/* Call static constructors */
-    bl __libc_init_array
+
+/* Call static constructors - Required for C++ support */
+/* bl __libc_init_array */
+
 /* Call the application's entry point.*/
   bl  main
   bx  lr    
@@ -515,4 +534,4 @@ g_pfnVectors:
    .weak      FPU_IRQHandler                  
    .thumb_set FPU_IRQHandler,Default_Handler  
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/*******************   (C)   COPYRIGHT   2011   STMicroelectronics   *****END   OF   FILE****/
