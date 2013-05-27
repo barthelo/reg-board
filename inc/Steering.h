@@ -21,11 +21,10 @@
 #include "Pwm.h"
 
 /* Exported types ------------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
 #define MAX_ANGLE 30
 #define MIN_ANGLE -30
 #define PWM_PERIOD 0.02 //Periode in Millisekunden (ms)
-
-/* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
 void STR_vSetAngle (int8_t);
